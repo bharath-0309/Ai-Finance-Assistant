@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Budgets{% endblock %}
+{% block content %}
+<h2>Budgets</h2>
+<div class="card mb-4"><div class="card-body">
+<form method="post" class="row g-2">
+<div class="col-md-3"><input class="form-control" type="month" name="month" value="{{ month }}" required></div>
+<div class="col-md-3"><select class="form-select" name="category"><option value="">Overall budget</option>{% for c in categories %}<option>{{ c }}</option>{% endfor %}</select></div>
+<div class="col-md-3"><input class="form-control" type="number" step="0.01" name="limit_amount" placeholder="Limit amount" required></div>
+<div class="col-md-2"><button class="btn btn-primary">Create budget</button></div>
+</form>
+</div></div>
+<div class="card"><div class="card-body">
+<h5>Budget usage for {{ month }}</h5>
+{% if budgets %}
+{% for b in budgets %}
+<div class="mb-4">
+<div class="d-flex justify-content-between"><b>{{ b.category }}</b><span>₹{{ b.spent }} / ₹{{ b.limit }}</span></div>
+<div class="progress mt-1"><div class="progress-bar {% if b.warning %}bg-warning{% endif %}" style="width: {{ [b.percent,100]|min }}%"></div></div>
+<div class="small text-muted mt-1">{{ b.percent }}% used — ₹{{ b.remaining }} remaining</div>
+</div>
+{% endfor %}
+{% else %}<p class="text-muted">No budget created for this month.</p>{% endif %}
+</div></div>
+{% endblock %}

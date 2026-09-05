@@ -1,0 +1,57 @@
+transaction_id,date,description,amount,transaction_type,category
+1,2025-01-03,"swiggy dinner",450,expense,Food
+2,2025-01-05,"uber office ride",280,expense,Transport
+3,2025-01-07,"amazon headphones",1800,expense,Shopping
+4,2025-01-09,"electricity bill",2200,expense,Bills
+5,2025-01-11,"netflix monthly",649,expense,Entertainment
+6,2025-01-13,"pharmacy medicine",520,expense,Health
+7,2025-01-15,"python course",1200,expense,Education
+8,2025-01-17,"restaurant lunch",650,expense,Food
+9,2025-01-18,"metro card recharge",500,expense,Transport
+10,2025-01-20,"clothes online",1400,expense,Shopping
+11,2025-01-22,"mobile bill",599,expense,Bills
+12,2025-01-24,"movie tickets",500,expense,Entertainment
+13,2025-01-25,"doctor consultation",800,expense,Health
+14,2025-01-27,"online class",900,expense,Education
+15,2025-02-02,"zomato dinner",550,expense,Food
+16,2025-02-04,"ola cab",320,expense,Transport
+17,2025-02-06,"flipkart shoes",2200,expense,Shopping
+18,2025-02-08,"internet bill",999,expense,Bills
+19,2025-02-10,"spotify subscription",119,expense,Entertainment
+20,2025-02-12,"medical tablets",350,expense,Health
+21,2025-02-14,"udemy course",700,expense,Education
+22,2025-02-16,"pizza dinner",750,expense,Food
+23,2025-02-18,"bus pass",450,expense,Transport
+24,2025-02-20,"shopping mall shirt",1600,expense,Shopping
+25,2025-02-22,"water bill",400,expense,Bills
+26,2025-02-24,"cinema movie",450,expense,Entertainment
+27,2025-02-25,"clinic visit",600,expense,Health
+28,2025-02-27,"college books",1100,expense,Education
+29,2025-03-03,"swiggy breakfast",300,expense,Food
+30,2025-03-05,"uber ride",250,expense,Transport
+31,2025-03-07,"amazon backpack",1300,expense,Shopping
+32,2025-03-09,"gas bill",900,expense,Bills
+33,2025-03-11,"prime video",299,expense,Entertainment
+34,2025-03-13,"dentist appointment",1000,expense,Health
+35,2025-03-15,"data science course",1500,expense,Education
+36,2025-03-17,"cafe coffee",280,expense,Food
+37,2025-03-19,"metro recharge",600,expense,Transport
+38,2025-03-21,"new jeans",1800,expense,Shopping
+39,2025-03-23,"phone recharge",399,expense,Bills
+40,2025-03-25,"concert ticket",900,expense,Entertainment
+41,2025-03-27,"vitamins",450,expense,Health
+42,2025-03-29,"study material",750,expense,Education
+43,2025-04-03,"restaurant dinner",900,expense,Food
+44,2025-04-05,"ola office",300,expense,Transport
+45,2025-04-07,"amazon mouse",700,expense,Shopping
+46,2025-04-09,"electricity payment",2100,expense,Bills
+47,2025-04-11,"youtube premium",149,expense,Entertainment
+48,2025-04-13,"hospital medicine",950,expense,Health
+49,2025-04-15,"coding bootcamp",1800,expense,Education
+50,2025-04-17,"zomato lunch",520,expense,Food
+51,2025-04-19,"cab ride",350,expense,Transport
+52,2025-04-21,"online shopping",1200,expense,Shopping
+53,2025-04-23,"internet recharge",899,expense,Bills
+54,2025-04-25,"movie night",600,expense,Entertainment
+55,2025-04-27,"doctor medicine",500,expense,Health
+56,2025-04-29,"exam books",850,expense,Education

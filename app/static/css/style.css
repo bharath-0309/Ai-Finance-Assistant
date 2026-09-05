@@ -1,0 +1,6 @@
+body { background: #f6f7fb; }
+.card { border: 0; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+.stat-card h3 { margin-top: 8px; }
+.stat-card span { color: #6c757d; font-size: .9rem; }
+.navbar .nav-link { font-size: .92rem; }
+table td, table th { vertical-align: middle; }

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div><h2>Dashboard</h2><p class="text-muted mb-0">Your monthly finance summary</p></div>
+  <form class="d-flex gap-2"><input type="month" name="month" value="{{ month }}" class="form-control"><button class="btn btn-outline-primary">View</button></form>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-4"><div class="card stat-card"><div class="card-body"><span>Total Income</span><h3>₹{{ "%.2f"|format(data.income) }}</h3></div></div></div>
+  <div class="col-md-4"><div class="card stat-card"><div class="card-body"><span>Total Expenses</span><h3>₹{{ "%.2f"|format(data.expenses) }}</h3></div></div></div>
+  <div class="col-md-4"><div class="card stat-card"><div class="card-body"><span>Available Balance</span><h3>₹{{ "%.2f"|format(data.balance) }}</h3></div></div></div>
+</div>
+
+<div class="row g-3 mt-1">
+<div class="col-md-6">
+<div class="card h-100"><div class="card-body">
+<h5>Category-wise spending</h5>
+<canvas id="categoryChart"></canvas>
+</div></div></div>
+<div class="col-md-6">
+<div class="card h-100"><div class="card-body">
+<h5>AI Financial Insights</h5>
+{% for insight in insights %}<div class="alert alert-info py-2">{{ insight }}</div>{% endfor %}
+{% if not insights %}<p class="text-muted">No insights yet.</p>{% endif %}
+</div></div></div>
+</div>
+
+<div class="row g-3 mt-1">
+<div class="col-md-6"><div class="card"><div class="card-body">
+<h5>Spending forecast</h5>
+{% if forecast.available %}
+<p class="mb-1">Estimated next-month spending:</p><h3>₹{{ "%.2f"|format(forecast.next_month_estimate) }}</h3>
+<small class="text-muted">Based on {{ forecast.months_used }} months. This is only an estimate.</small>
+{% else %}<p class="text-muted">{{ forecast.message }}</p>{% endif %}
+</div></div></div>
+<div class="col-md-6"><div class="card"><div class="card-body">
+<h5>Budget status</h5>
+{% if budgets %}
+{% for b in budgets %}
+<div class="mb-3"><div class="d-flex justify-content-between"><span>{{ b.category }}</span><span>₹{{ b.spent }} / ₹{{ b.limit }}</span></div>
+<div class="progress"><div class="progress-bar {% if b.warning %}bg-warning{% endif %}" style="width: {{ [b.percent,100]|min }}%"></div></div>
+<small>{{ b.percent }}% used</small></div>
+{% endfor %}
+{% else %}<p class="text-muted">No budgets for {{ month }}.</p>{% endif %}
+<a href="{{ url_for('main.budgets', month=month) }}" class="btn btn-sm btn-outline-primary">Manage budgets</a>
+</div></div></div>
+</div>
+
+<div class="card mt-3"><div class="card-body">
+<div class="d-flex justify-content-between"><h5>Recent transactions</h5><a href="{{ url_for('main.transactions') }}">View all</a></div>
+<div class="table-responsive"><table class="table">
+<tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th></tr>
+{% for t in recent %}<tr><td>{{ t.date }}</td><td>{{ t.description }}</td><td>{{ t.category }}</td><td>{{ t.type }}</td><td>₹{{ "%.2f"|format(t.amount) }}</td></tr>{% endfor %}
+</table></div></div></div>
+{% endblock %}
+{% block scripts %}
+<script>
+const labels = {{ data.categories.keys()|list|tojson }};
+const values = {{ data.categories.values()|list|tojson }};
+new Chart(document.getElementById("categoryChart"), {
+  type: "doughnut",
+  data: {labels: labels, datasets: [{data: values}]},
+  options: {responsive: true}
+});
+</script>
+{% endblock %}

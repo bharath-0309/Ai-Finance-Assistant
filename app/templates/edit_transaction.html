@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Edit Transaction{% endblock %}
+{% block content %}
+<div class="col-md-7 mx-auto"><div class="card"><div class="card-body">
+<h3>Edit transaction</h3>
+<form method="post">
+<label class="form-label">Date</label><input class="form-control mb-2" type="date" name="date" value="{{ tx.date }}" required>
+<label class="form-label">Description</label><input class="form-control mb-2" name="description" value="{{ tx.description }}" required>
+<label class="form-label">Amount</label><input class="form-control mb-2" type="number" step="0.01" name="amount" value="{{ tx.amount }}" required>
+<label class="form-label">Type</label><select class="form-select mb-2" name="type"><option value="expense" {% if tx.type=='expense' %}selected{% endif %}>Expense</option><option value="income" {% if tx.type=='income' %}selected{% endif %}>Income</option></select>
+<label class="form-label">Category</label><select class="form-select mb-3" name="category">{% for c in categories %}<option {% if tx.category==c %}selected{% endif %}>{{ c }}</option>{% endfor %}<option {% if tx.category=='Income' %}selected{% endif %}>Income</option></select>
+<button class="btn btn-primary">Save changes</button> <a class="btn btn-secondary" href="{{ url_for('main.transactions') }}">Cancel</a>
+</form></div></div></div>
+{% endblock %}

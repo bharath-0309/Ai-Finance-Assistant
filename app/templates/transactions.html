@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Transactions{% endblock %}
+{% block content %}
+<h2>Transactions</h2>
+<div class="card mb-4"><div class="card-body">
+<h5>Add transaction</h5>
+<form method="post" class="row g-2" id="txForm">
+  <div class="col-md-2"><input class="form-control" type="date" name="date" required></div>
+  <div class="col-md-3"><input class="form-control" name="description" id="description" placeholder="e.g. Swiggy dinner 450" required></div>
+  <div class="col-md-2"><input class="form-control" type="number" step="0.01" name="amount" placeholder="Amount" required></div>
+  <div class="col-md-2"><select class="form-select" name="type" id="type"><option value="expense">Expense</option><option value="income">Income</option></select></div>
+  <div class="col-md-2"><select class="form-select" name="category"><option value="">Auto category</option>{% for c in categories %}<option>{{ c }}</option>{% endfor %}</select></div>
+  <div class="col-md-1"><button class="btn btn-primary w-100">Add</button></div>
+</form>
+<small class="text-muted">For expenses, leaving category blank lets the ML model predict it.</small>
+</div></div>
+
+<form class="row g-2 mb-3">
+  <div class="col-md-5"><input class="form-control" name="q" value="{{ request.args.get('q','') }}" placeholder="Search description/category"></div>
+  <div class="col-md-3"><select class="form-select" name="type"><option value="">All types</option><option value="income">Income</option><option value="expense">Expense</option></select></div>
+  <div class="col-md-2"><button class="btn btn-outline-primary">Search</button></div>
+</form>
+
+<div class="card"><div class="card-body"><div class="table-responsive">
+<table class="table align-middle"><tr><th>Date</th><th>Description</th><th>Amount</th><th>Type</th><th>Category</th><th>Actions</th></tr>
+{% for t in transactions %}
+<tr><td>{{ t.date }}</td><td>{{ t.description }}</td><td>₹{{ "%.2f"|format(t.amount) }}</td><td>{{ t.type }}</td><td>{{ t.category }}</td>
+<td class="d-flex gap-1"><a class="btn btn-sm btn-outline-secondary" href="{{ url_for('main.edit_transaction', tx_id=t.id) }}">Edit</a>
+<form method="post" action="{{ url_for('main.delete_transaction', tx_id=t.id) }}"><button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this transaction?')">Delete</button></form></td></tr>
+{% endfor %}
+</table></div></div></div>
+{% endblock %}
